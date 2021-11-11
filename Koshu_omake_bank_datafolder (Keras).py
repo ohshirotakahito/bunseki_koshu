@@ -32,7 +32,7 @@ from keras.utils import np_utils
 from keras.layers import Dense, Dropout
 
 #データの読み出し
-df = pd.read_csv("data/bank-additional.txt")
+df = pd.read_csv("testdata/bank-additional.txt")
 ac=df.columns#カラム
 ai=df.index#インデックス
 
