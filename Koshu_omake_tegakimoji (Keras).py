@@ -171,5 +171,5 @@ def predict_digit(filename):
     print(model.predict_classes(my_img))
     return res[0]
 
-n = predict_digit("eight.png")
+n = predict_digit("testdata/eight.png")
 print("eight.png = " + str(n))
