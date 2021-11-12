@@ -13,7 +13,7 @@ response.close()
 soup = str(soup)
 
 #保存するパスを作成する
-save_path = ('data/'+'bf_' +'r.txt')
+save_path = ('testdata/'+'bf_' +'r.txt')
 
 f = open(save_path, "w",encoding='utf-8')
 f.write(soup)
