@@ -50,7 +50,7 @@ a を b で割った余りは a % b で求められます。
 """
 
 
-#答えの一例　時間が足りない？
+#答えの一例
 
 #　答え1
 for i in range(1,101):
@@ -74,6 +74,7 @@ for i in range(1,101):
         print('Buzz')
     else:
         print(i)
-
+        
+#　答え
 [print('FizzBuzz' if x % 15 == 0 else 'Fizz' if x%3 == 0 else 'Buzz' if x % 5== 0 else x)  for x in range(1,101)]
 
