@@ -18,9 +18,9 @@ from sklearn import preprocessing
 from keras.models import Sequential
 from keras.layers.convolutional import Conv2D
 from keras.layers.pooling import MaxPool2D
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 from keras.layers.core import Dense, Activation, Dropout, Flatten
-from keras.utils import plot_model
+from keras.utils.vis_utils import plot_model
 from keras.callbacks import TensorBoard
 from keras.datasets import cifar10
 from keras.utils import np_utils
@@ -124,7 +124,9 @@ plt.legend(['train'], loc='upper left')
 plt.show()
 
 #モデルをもちいた予想
-predict_classes = model.predict_classes(x_test, batch_size=32)
+predict_classes = model.predict(x_test, batch_size=32)
+predict_classes = np.argmax(predict_classes,1)
+
 true_classes = np.argmax(y_test,1)
 w=confusion_matrix(true_classes, predict_classes)
 
