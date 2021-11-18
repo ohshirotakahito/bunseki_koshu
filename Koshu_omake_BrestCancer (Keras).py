@@ -131,9 +131,10 @@ plt.legend(['train'], loc='upper left')
 plt.show()
 
 #モデルをもちいた予想
-predict_classes = model.predict_classes(X_test, batch_size=32)
-
+predict_classes = model.predict(X_test, batch_size=32)
+predict_classes = np.argmax(predict_classes,1)
 true_classes = np.argmax(Y_test,1)
+
 matx=confusion_matrix(true_classes, predict_classes)
 
 # 予測結果と、正解（本当の答え）がどのくらい合っていたかを表す混合行列の標準化
@@ -162,5 +163,3 @@ fig, ax = plt.subplots(figsize=(4, 3)) # 混合行列のカラムの大きさ設
 sns.heatmap(MX2, annot=True, fmt="1.3")# fmtでデータの表示桁数
 ax.set_ylim(len(matx), 0)# 混合行列の軸の下限を設定し，値がみえるようにする（バグ）
 ax.set_title('normalized confusion matrix')
-
-
