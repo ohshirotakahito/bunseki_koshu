@@ -24,7 +24,7 @@ print('a',func(a) )
 # classの定義
 class class1(object):
     def __init__(self):# コンストラクタ:objが呼び出されるとまず実行される
-        self.parameter1 = 1　
+        self.parameter1 = 1
         self.parameter2 = 2
 
     def calculate(self,x):
@@ -51,4 +51,3 @@ print(obj.analyze(a) )
 obj.parameter1 = 3 
 print('parameter 1',obj.parameter1)
 print(obj.calculate(a) )
-
