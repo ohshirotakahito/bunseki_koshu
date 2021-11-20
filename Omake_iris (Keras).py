@@ -1,4 +1,4 @@
-参考ページ
+#参考ページ
 #http://aidiary.hatenablog.com/category/Keras?page=1478696865
 
 #モジュール読み出し
