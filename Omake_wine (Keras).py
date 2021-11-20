@@ -81,7 +81,7 @@ from keras.layers import Dense, Dropout
 ##データの読み出し
 #テキストデータに変換
 # =============================================================================
-# txt_data = open("data/winequality-red.txt","r")
+# txt_data = open("testdata/winequality-red.txt","r")
 # array=[]
 # df=[]
 # 
