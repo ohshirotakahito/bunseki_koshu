@@ -100,7 +100,7 @@ from keras.layers import Dense, Dropout
 
 #df = np.array(df)
 # =============================================================================
-with open("data/winequality-red.txt", 'r') as f:
+with open("testdata/winequality-red.txt", 'r') as f:
      wines = list(csv.reader(f, delimiter="\t"))
      array= np.array(wines[1:], dtype=np.float)
 #print(array[:3],type(array))
