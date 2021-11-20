@@ -1,4 +1,4 @@
-#参考ページ
+参考ページ
 #http://aidiary.hatenablog.com/category/Keras?page=1478696865
 
 #モジュール読み出し
@@ -56,7 +56,8 @@ if __name__ == "__main__":
     loss, accuracy = model.evaluate(test_X, test_Y, verbose=0)
     print("Accuracy = {:.2f}".format(accuracy))
 
-predict_classes = model.predict_classes(test_X, batch_size=32)
+predict_classes = model.predict(test_X, batch_size=32)
+predict_classes = np.argmax(predict_classes,1)
 true_classes = np.argmax(test_Y,1)
 matx=confusion_matrix(true_classes, predict_classes)
   
