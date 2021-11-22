@@ -37,17 +37,24 @@ Y=digits.target#ラベル
 Z=digits.images#8×8のimageデータの二次行列
 print(X.shape)
 
-num_row = 2
-num_col = 5
+#一次元行列から二次元行列への変換
+#for j in range(10):
+#    Z=np.reshape(X[j],(8,8))
+#
+#print(Z)
 
-# mnistのデータを画像で出力
-fig, axes = plt.subplots(num_row, num_col, figsize=(1.5*num_col,2*num_row))
-for i in range(10):
-    ax = axes[i//num_col, i%num_col]
-    ax.imshow(Z[i], cmap='gray')
-    ax.set_title('Label: {}'.format(Y[i]))
-plt.tight_layout()
-plt.show()
+# =============================================================================
+# # 数字データの平均化した値を画像で出力（可視化：＃１－１０のデータ）
+#mean_images = np.zeros((10,8,8))
+#fig = plt.figure(figsize=(10,5))
+#for i in range(10):
+#     mean_images[i] = W[Y==i].mean(axis=0)
+#     ax = fig.add_subplot(2, 5, i+1)
+#     ax.axis('off')
+#     ax.set_title('train.{0} (n={1})'.format(i, len(W[Y==i])))
+#     ax.imshow(mean_images[i],cmap=plt.cm.gray, interpolation='none')
+#plt.show()
+# =============================================================================
 
 # データの標準化
 X = preprocessing.scale(X)
@@ -68,7 +75,14 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size=0.8)
 
 # 訓練データとテストデータのshapeをチェック
 print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
+#print(x_test[0])
+#print(x_test[0].shape)
 
+# データの可視化(一つのデータを可視化)
+#plt.imshow(x_train[0], cmap='gray')
+#plt.colorbar()
+#plt.savefig('x_train[0]')
+#plt.show()
 
 # モデル構築（訓練プロセスの定義）
 model = build_multilayer_perceptron()#上記のdefより
@@ -77,7 +91,7 @@ model.compile(optimizer='adam',##学習の最適化法を決定(勾配法)
                   metrics=['accuracy'])
 
 # モデル訓練
-history=model.fit(x_train, y_train, epochs=5, batch_size=1, verbose=1)
+history=model.fit(x_train, y_train, epochs=10, batch_size=1, verbose=1)
 
 # モデルの保存
 model.save('test.h5')
@@ -103,8 +117,7 @@ plt.show()
 #モデルをもちいた予想
 predict_classes = model.predict(x_test, batch_size=32)
 predict_classes = np.argmax(predict_classes,1)
-#predict_classes = model.predict_classes(x_test, batch_size=32)
-#print(predict_classes)
+
 true_classes = np.argmax(y_test,1)
 w=confusion_matrix(true_classes, predict_classes)
 
@@ -126,17 +139,17 @@ def predict_digit(filename):
     #my_img = cv2.dilate(my_img,kernel,iterations = 1)
     #plt.imshow(my_img, cmap='gray')
     #plt.show()
-    #グレースケールに変換する
+    #グレースケールに変換する(CNN)
     my_img = cv2.cvtColor(my_img, cv2.COLOR_BGR2GRAY)
     # 16 * 16のサイズに変換する
     my_img = cv2.resize(my_img,(32,32))
     plt.imshow(my_img, cmap='gray')
     plt.show()
-    # 16 * 16のサイズに変換する
+    # 16 * 16のサイズに変換する(CNN)
     my_img = cv2.resize(my_img,(16,16))
     plt.imshow(my_img, cmap='gray')
     plt.show()
-    # 8 * 8のサイズに変換する
+    # 8 * 8のサイズに変換する(CNN)
     my_img = cv2.resize(my_img,(8,8))
     plt.imshow(my_img, cmap='gray')
     plt.show()
@@ -147,9 +160,16 @@ def predict_digit(filename):
     #二次元を一次元に変換
     my_img = my_img.reshape((-1,64))
     model.predict_classes(my_img)
-    res=model.predict_classes(my_img)
+    res = model.predict_classes(my_img)
     print(model.predict_classes(my_img))
     return res[0]
 
-n = predict_digit("testdata/eight.png")
-print("eight.png = " + str(n))
+#ここの''の数を手書き画像のファイル名に変える
+tegaki = 'unknown'
+
+fn = f"testdata/{tegaki}.png"
+
+a = fn.split("/")
+n = predict_digit(f"testdata/{tegaki}.png")
+
+print(f"{a[1]} = {str(n)}")
