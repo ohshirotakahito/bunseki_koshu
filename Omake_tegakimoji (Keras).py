@@ -37,6 +37,18 @@ Y=digits.target#ラベル
 Z=digits.images#8×8のimageデータの二次行列
 print(X.shape)
 
+num_row = 2
+num_col = 5
+
+# plot images
+fig, axes = plt.subplots(num_row, num_col, figsize=(1.5*num_col,2*num_row))
+for i in range(10):
+    ax = axes[i//num_col, i%num_col]
+    ax.imshow(Z[i], cmap='gray')
+    ax.set_title('Label: {}'.format(Y[i]))
+plt.tight_layout()
+plt.show()
+
 #一次元行列から二次元行列への変換
 #for j in range(10):
 #    Z=np.reshape(X[j],(8,8))
